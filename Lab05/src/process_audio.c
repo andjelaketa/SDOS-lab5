@@ -43,6 +43,10 @@
 
 
 #include "ADDS_21479_EzKit.h"
+#include "lab5_app.h"          /* LAB5: modifikacija 5 - overdrive */
+
+#define DO_CYCLE_COUNTS
+#include <cycle_count.h>       /* LAB5: mjerenje ciklusa cijelog prekida */
 
 void  process_AD1939_samples(  uint32_t iid, void *handlerarg)
 {
@@ -52,6 +56,9 @@ void  process_AD1939_samples(  uint32_t iid, void *handlerarg)
 	 *  rx1a_buf[] and tx0a_buf[])
 	 */
 	   
+	cycle_t lab5_t0, lab5_dt;
+	START_CYCLE_COUNT(lab5_t0);   /* LAB5: pocetak mjerenja cijelog prekida */
+
 	Receive_ADC_Samples();
 
 	/* Loop back AD1939 ADC1 data to DAC1 */
@@ -72,6 +79,20 @@ void  process_AD1939_samples(  uint32_t iid, void *handlerarg)
 	Left_Channel_Out4 = Left_Channel_In1;
 	Right_Channel_Out4 = Right_Channel_In1;
 
+	/* LAB5: overdrive (ulaz 1 ili interni sweep) na SVA 4 stereo izlaza.
+	 * Prepisuje originalno rutiranje iznad; originalni kod je ostavljen
+	 * da bi mjerenje cijelog prekida ukljucilo i njegovu cijenu. */
+	{
+		float y = lab5_process_sample(Left_Channel_In1, Right_Channel_In1);
+		Left_Channel_Out1 = y;  Right_Channel_Out1 = y;
+		Left_Channel_Out2 = y;  Right_Channel_Out2 = y;
+		Left_Channel_Out3 = y;  Right_Channel_Out3 = y;
+		Left_Channel_Out4 = y;  Right_Channel_Out4 = y;
+	}
+
 	Transmit_DAC_Samples();
+
+	STOP_CYCLE_COUNT(lab5_dt, lab5_t0);  /* LAB5: kraj mjerenja */
+	lab5_note_isr_cycles((unsigned int)lab5_dt);
 }
 
