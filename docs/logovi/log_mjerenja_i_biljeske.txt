@@ -1,0 +1,260 @@
+Loading application: "C:\Users\Korisnik\Downloads\sdos-lab5-overdrive (1)\sdos-lab5-overdrive\Lab05\Release\Lab05.dxe"
+Load complete.
+
+=== SDOS Lab5 / modifikacija 5 - overdrive i aliasing ===
+fs = 48000 Hz, fCCLK = 400 MHz, budzet = 8333 ciklusa/odmjerak
+half-band: L = 47 (NH = 12), beta = 8.0
+
+--- BENCHMARK (N=256, prazna petlja = 14.0 cik/odm oduzeta) ---
+BENCH tvrdo odsijecanje (G=8)      :    12.0 ciklusa/odmjerak
+BENCH tanhf, G=1 (mali argument)   :    67.9 ciklusa/odmjerak
+BENCH tanhf, G=8                   :   103.7 ciklusa/odmjerak
+BENCH tanhf, G=64 (zasicenje)      :    55.5 ciklusa/odmjerak
+BENCH polinom (G=8)                :    17.0 ciklusa/odmjerak
+BENCH interpolator 2x (half-band)  :    89.0 ciklusa/odmjerak
+BENCH decimator 2x (half-band)     :    82.0 ciklusa/odmjerak
+BENCH OS lanac bez nelinearnosti   :   168.0 ciklusa/odmjerak
+BENCH OS + tvrdo (G=8)             :   192.0 ciklusa/odmjerak
+BENCH OS + tanhf (G=8)             :   372.3 ciklusa/odmjerak
+BENCH OS + polinom (G=8)           :   200.0 ciklusa/odmjerak
+BENCH sweep generator              :    48.0 ciklusa/odmjerak
+--- kraj benchmarka ---
+
+Talkthrough is running successfully
+LOG fs=48000 mode=HARD   OS=1 src=SWEEP G=8.0   | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=305.0 max=305 | budzet=8333 (3.66%) over=0
+
+
+Korak 0 – HARD, OS=1
+
+Čujem li pored glavnog tona koji ide gore i tonove koji idu nadolje? DA
+Koliko su glasni: jedva / jasno / jako? jedva se cuju ali se cuju
+Kada ih najviše čujem: na početku sweep-a (nizak ton) ili pri kraju (visok ton)? najvise ih cujem pri kraju ali cuju se i na pocetku
+Kako bih opisala zvuk u 2–3 riječi (metalno, zviždi, prljavo, „radio između stanica“)? glavni zvuk zvizdi a pozadinski zvukovi su kraci i podsjecaju na zvuk iz ogrice ili neko prebrisavanje od niskog do visokog tona
+
+Korak 1 – TANH, OS=1
+
+Je li zvuk blaži ili oštriji nego HARD? blazi i sporiji i ne cuju se na pocetku, krecu negdje od sredine
+Čujem li i dalje tonove koji idu nadolje? Više ili manje nego kod HARD? manje se cuju tonovi koji idu prema dolje ali neznatno
+
+Korak 2 – POLY, OS=1
+
+Sa G=8: zvuči li slično kao HARD ili kao TANH? meni ovo zvuci vise slucno kao HARD
+(na kraju, sa malim G preko PB1) Kad su LED5–LED8 ugašene: čujem li uopšte tonove koji idu nadolje? Je li zvuk „čistiji“?
+
+Korak 3 – BYPASS, OS=1
+
+Čujem li samo jedan čist ton koji klizi gore? da
+Koliko se razlikuje od HARD? Ovo je moja referenca za „čist“ zvuk. zvuk je mnogo tuplji i malo tisi, kao da ga slusam kroz neki oblak
+
+Korak 4 – HARD, OS=1 (ponovo)
+
+Zapamti kako zvuči, jer sljedeći korak poredim baš sa ovim.
+Ima li nešto što ranije nisam primijetila, sad kad znam kako zvuči čist ton?
+
+
+
+ispis konzole Loading application: "C:\Users\Korisnik\Downloads\sdos-lab5-overdrive (1)\sdos-lab5-overdrive\Lab05\Release\Lab05.dxe"
+Load complete.
+
+=== SDOS Lab5 / modifikacija 5 - overdrive i aliasing ===
+fs = 48000 Hz, fCCLK = 400 MHz, budzet = 8333 ciklusa/odmjerak
+half-band: L = 47 (NH = 12), beta = 8.0
+
+--- BENCHMARK (N=256, prazna petlja = 14.0 cik/odm oduzeta) ---
+BENCH tvrdo odsijecanje (G=8)      :    12.0 ciklusa/odmjerak
+BENCH tanhf, G=1 (mali argument)   :    67.9 ciklusa/odmjerak
+BENCH tanhf, G=8                   :   103.7 ciklusa/odmjerak
+BENCH tanhf, G=64 (zasicenje)      :    55.5 ciklusa/odmjerak
+BENCH polinom (G=8)                :    17.0 ciklusa/odmjerak
+BENCH interpolator 2x (half-band)  :    89.0 ciklusa/odmjerak
+BENCH decimator 2x (half-band)     :    82.0 ciklusa/odmjerak
+BENCH OS lanac bez nelinearnosti   :   168.0 ciklusa/odmjerak
+BENCH OS + tvrdo (G=8)             :   192.0 ciklusa/odmjerak
+BENCH OS + tanhf (G=8)             :   372.3 ciklusa/odmjerak
+BENCH OS + polinom (G=8)           :   200.0 ciklusa/odmjerak
+BENCH sweep generator              :    48.0 ciklusa/odmjerak
+--- kraj benchmarka ---
+
+Talkthrough is running successfully
+LOG fs=48000 mode=HARD   OS=1 src=SWEEP G=8.0   | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=305.0 max=305 | budzet=8333 (3.66%) over=0
+LOG fs=48000 mode=TANH   OS=1 src=SWEEP G=8.0   | obrada: min=92 avg=153.0 max=157 | cijeli prekid: avg=355.3 max=400 | budzet=8333 (4.26%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=8.0   | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=346.5 max=496 | budzet=8333 (4.16%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=8.0   | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=299.7 max=408 | budzet=8333 (3.60%) over=0
+LOG fs=48000 mode=HARD   OS=1 src=SWEEP G=8.0   | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=297.8 max=388 | budzet=8333 (3.57%) over=0
+
+=== SDOS Lab5 / modifikacija 5 - overdrive i aliasing ===
+fs = 48000 Hz, fCCLK = 400 MHz, budzet = 8333 ciklusa/odmjerak
+half-band: L = 47 (NH = 12), beta = 8.0
+
+--- BENCHMARK (N=256, prazna petlja = 14.0 cik/odm oduzeta) ---
+BENCH tvrdo odsijecanje (G=8)      :    12.0 ciklusa/odmjerak
+BENCH tanhf, G=1 (mali argument)   :    67.9 ciklusa/odmjerak
+BENCH tanhf, G=8                   :   103.7 ciklusa/odmjerak
+BENCH tanhf, G=64 (zasicenje)      :    55.5 ciklusa/odmjerak
+BENCH polinom (G=8)                :    17.0 ciklusa/odmjerak
+BENCH interpolator 2x (half-band)  :    89.0 ciklusa/odmjerak
+BENCH decimator 2x (half-band)     :    82.0 ciklusa/odmjerak
+BENCH OS lanac bez nelinearnosti   :   168.0 ciklusa/odmjerak
+BENCH OS + tvrdo (G=8)             :   192.0 ciklusa/odmjerak
+BENCH OS + tanhf (G=8)             :   372.3 ciklusa/odmjerak
+BENCH OS + polinom (G=8)           :   200.0 ciklusa/odmjerak
+BENCH sweep generator              :    48.0 ciklusa/odmjerak
+--- kraj benchmarka ---
+
+Talkthrough is running successfully
+
+
+Korak 5 – HARD, OS=2 (LED3 upaljena)
+
+U odnosu na korak 4: jesu li tonovi koji idu nadolje nestali, tiši ili isti? tisi su
+Je li se promijenila sama distorzija (hrapavost), ili su nestali samo ti neželjeni tonovi? ne djeluje mi da je zvuk hrapaviji, mozda malo pri visim tonovima
+Gdje je razlika najveća: kod niskih ili kod visokih tonova sweep-a? razlika mi je najveca kod niskoh tonova sweep-a
+Ako mogu, pritisnem PB4 tri puta da se vratim na OS=1 i čujem razliku direktno, pa još jednom da se vratim na OS=2.
+
+Korak 6 – TANH, OS=2
+
+Ima li razlike u odnosu na TANH bez OS (korak 1)? Je li veća ili manja nego kod HARD? Zvuk je generalno vise frekvencije, tako djeluje, mislim an originalni zvuk, alijasi su tisi i pojavljuju se jos kasnije u odnosu na os1
+
+Korak 7 – POLY, OS=2
+
+Ima li razlike u odnosu na POLY bez OS (korak 2)? alijasi se cuju od sredine zvuka, osnovni zvuk djeluje da je na visim frekvencijama nego kad sam slusala, nije djeluje nego su brzi itisi sa os1 i djeluje da su alijasi brzi
+(sad probaj malo G preko PB1) Ima li razlike između OS=1 i OS=2 kad je G malo? Očekujem da je nema, jer POLY tada ionako nema aliasa.
+
+Korak 8 – BYPASS, OS=2
+
+Zvuči li isto kao BYPASS bez OS (korak 3)? Treba da zvuči isto, jer OS sam po sebi ne mijenja zvuk, samo malo kasni. zvuci isto
+
+
+
+
+
+#	G	Režim	LOG: obrada avg	LOG: cijeli prekid avg	Aliasi (ne / tiho / jasno / jako)	Opis zvuka (2–3 riječi)	Očekivano
+0	8	HARD					već izmjereno (referenca)
+0	8	TANH					već izmjereno
+0	8	POLY					već izmjereno
+1	64	HARD cuje se gomila alijasa u svim smjerovima					više aliasa nego G=8, zujanje
+2	64	TANH opet se cuje gomila ali nekako usporavaju sa povecavanjem frekvencije originalnog zvuka				zvuči skoro kao HARD; ciklusi manji nego na G=8
+3	64	POLY	definitvno najbrzi i najvise alijasa				skoro kao HARD
+4	1	HARD	ne cuju se alijasi ali kao da je glavni zvuk tisi				čisto kao BYPASS (nema odsijecanja)
+5	1	TANH	ne cuju se alijasi ali kao da je glavni zvuk tisi				skoro čisto; ciklusi manji nego na G=8
+6	1	POLY	ne cuju se alijasi				čisto, bez aliasa
+7	2	HARD	ja ne cujem alijase ali kao da zvuk krene unazad malo na kraju		tek malo izobličenja
+8	2	TANH jako jako tiho se cuju na kraju				blaga distorzija
+9	2	POLY	ja ne cujem izoblicenja ali kao da zvuk krene malo unazad na kraju				blaga distorzija, bez aliasa
+
+Loading application: "C:\Users\Korisnik\Downloads\sdos-lab5-overdrive (1)\sdos-lab5-overdrive\Lab05\Release\Lab05.dxe"
+Load complete.
+
+=== SDOS Lab5 / modifikacija 5 - overdrive i aliasing ===
+fs = 48000 Hz, fCCLK = 400 MHz, budzet = 8333 ciklusa/odmjerak
+half-band: L = 47 (NH = 12), beta = 8.0
+
+--- BENCHMARK (N=256, prazna petlja = 14.0 cik/odm oduzeta) ---
+BENCH tvrdo odsijecanje (G=8)      :    12.0 ciklusa/odmjerak
+BENCH tanhf, G=1 (mali argument)   :    67.9 ciklusa/odmjerak
+BENCH tanhf, G=8                   :   103.7 ciklusa/odmjerak
+BENCH tanhf, G=64 (zasicenje)      :    55.5 ciklusa/odmjerak
+BENCH polinom (G=8)                :    17.0 ciklusa/odmjerak
+BENCH interpolator 2x (half-band)  :    89.0 ciklusa/odmjerak
+BENCH decimator 2x (half-band)     :    82.0 ciklusa/odmjerak
+BENCH OS lanac bez nelinearnosti   :   168.0 ciklusa/odmjerak
+BENCH OS + tvrdo (G=8)             :   192.0 ciklusa/odmjerak
+BENCH OS + tanhf (G=8)             :   372.3 ciklusa/odmjerak
+BENCH OS + polinom (G=8)           :   200.0 ciklusa/odmjerak
+BENCH sweep generator              :    48.0 ciklusa/odmjerak
+--- kraj benchmarka ---
+
+Talkthrough is running successfully
+LOG fs=48000 mode=HARD   OS=1 src=SWEEP G=8.0   | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=305.0 max=305 | budzet=8333 (3.66%) over=0
+LOG fs=48000 mode=TANH   OS=1 src=SWEEP G=8.0   | obrada: min=92 avg=153.0 max=157 | cijeli prekid: avg=366.8 max=400 | budzet=8333 (4.40%) over=0
+LOG fs=48000 mode=TANH   OS=2 src=SWEEP G=8.0   | obrada: min=324 avg=446.0 max=454 | cijeli prekid: avg=545.5 max=696 | budzet=8333 (6.55%) over=0
+LOG fs=48000 mode=POLY   OS=2 src=SWEEP G=8.0   | obrada: min=278 avg=278.0 max=278 | cijeli prekid: avg=558.0 max=793 | budzet=8333 (6.70%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=IN G=8.0   | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=337.6 max=617 | budzet=8333 (4.05%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=8.0   | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=351.3 max=469 | budzet=8333 (4.22%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=8.0   | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=299.3 max=408 | budzet=8333 (3.59%) over=0
+LOG fs=48000 mode=BYPASS OS=2 src=SWEEP G=8.0   | obrada: min=238 avg=238.0 max=238 | cijeli prekid: avg=457.9 max=480 | budzet=8333 (5.49%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=8.0   | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=316.5 max=577 | budzet=8333 (3.80%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=12.0  | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=291.0 max=388 | budzet=8333 (3.49%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=16.0  | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=291.2 max=388 | budzet=8333 (3.50%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=24.0  | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=291.2 max=388 | budzet=8333 (3.49%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=32.0  | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=291.0 max=388 | budzet=8333 (3.49%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=48.0  | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=291.0 max=388 | budzet=8333 (3.49%) over=0
+LOG fs=48000 mode=HARD   OS=1 src=SWEEP G=48.0  | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=300.2 max=388 | budzet=8333 (3.60%) over=0
+LOG fs=48000 mode=TANH   OS=1 src=SWEEP G=48.0  | obrada: min=88 avg=104.3 max=157 | cijeli prekid: avg=339.8 max=402 | budzet=8333 (4.08%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=48.0  | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=326.9 max=496 | budzet=8333 (3.92%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=64.0  | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=311.3 max=408 | budzet=8333 (3.74%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=96.0  | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=311.2 max=408 | budzet=8333 (3.73%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=128.0 | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=311.3 max=408 | budzet=8333 (3.74%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=256.0 | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=311.4 max=408 | budzet=8333 (3.74%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=1.0   | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=311.2 max=408 | budzet=8333 (3.73%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=1.0   | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=299.5 max=408 | budzet=8333 (3.59%) over=0
+LOG fs=48000 mode=HARD   OS=1 src=SWEEP G=1.0   | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=299.9 max=388 | budzet=8333 (3.60%) over=0
+LOG fs=48000 mode=TANH   OS=1 src=SWEEP G=1.0   | obrada: min=92 avg=112.0 max=112 | cijeli prekid: avg=334.6 max=402 | budzet=8333 (4.02%) over=0
+LOG fs=48000 mode=TANH   OS=1 src=SWEEP G=1.5   | obrada: min=92 avg=133.5 max=157 | cijeli prekid: avg=368.2 max=451 | budzet=8333 (4.42%) over=0
+LOG fs=48000 mode=TANH   OS=1 src=SWEEP G=2.0   | obrada: min=92 avg=140.3 max=157 | cijeli prekid: avg=379.8 max=496 | budzet=8333 (4.56%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=2.0   | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=326.1 max=496 | budzet=8333 (3.91%) over=0
+LOG fs=48000 mode=BYPASS OS=1 src=SWEEP G=2.0   | obrada: min=49 avg=49.0 max=49 | cijeli prekid: avg=300.1 max=408 | budzet=8333 (3.60%) over=0
+LOG fs=48000 mode=HARD   OS=1 src=SWEEP G=2.0   | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=299.7 max=388 | budzet=8333 (3.60%) over=0
+LOG fs=48000 mode=TANH   OS=1 src=SWEEP G=2.0   | obrada: min=92 avg=140.3 max=157 | cijeli prekid: avg=353.4 max=402 | budzet=8333 (4.24%) over=0
+LOG fs=48000 mode=POLY   OS=1 src=SWEEP G=2.0   | obrada: min=69 avg=69.0 max=69 | cijeli prekid: avg=335.3 max=451 | budzet=8333 (4.02%) over=0
+LOG fs=48000 mode=HARD   OS=2 src=SWEEP G=2.0   | obrada: min=266 avg=266.0 max=266 | cijeli prekid: avg=407.9 max=508 | budzet=8333 (4.90%) over=0
+
+
+DEVET HILJADA I SEST STOTINA HERCA
+
+
+#	Kako doći	Stanje	LOG: obrada avg	LOG: cijeli prekid avg	LOG: % budžeta	Aliasi (ne / tiho / jasno / jako)	Opis zvuka (2–3 riječi)	Očekivano
+1	odmah nakon starta	HARD, OS=1						aliasa manje nego na 48 kHz; obrada ≈63, % ≈ duplo veći nego na 48 kHz
+2	PB4 jednom (upali se LED3)	HARD, OS=2						razlika u odnosu na #1 mala; obrada ≈266
+3	PB3 jednom	TANH, OS=2						samo za broj; obrada ≈446
+
+Pitanja dok slušaš
+
+#1 – HARD, OS=1 na 96 kHz
+
+Čujem li kratke zvuke u pozadini (aliase)? Da / ne da
+U odnosu na HARD, OS=1 na 48 kHz: aliasa ima manje / isto / više? djeluje da ih je manje i da su tisi
+Kada ih najviše čujem: na početku ili na kraju sweep-a? najvise na kraju
+Zvuči li sličnije HARD-u na 48 kHz bez OS ili HARD-u na 48 kHz sa OS? (Očekivano: sa OS.)  pa ne sjecam se
+
+#2 – HARD, OS=2 na 96 kHz
+
+Razlika u odnosu na #1: velika / mala / ne čujem je? pa velik araylika, cuju se aliasi ali tise, krace i manje, tj pocinju na kraju nekako
+Je li razlika manja nego što je bila na 48 kHz (OS=1 prema OS=2)? Očekivano je da jeste, jer je na 96 kHz aliasa već malo.
+
+#3 – TANH, OS=2: samo sačekaj LOG liniju, slušanje nije potrebno. ne cuje se nista slusala sam
+
+Zaključak u jednoj rečenici (napiši odmah dok pamtiš)
+
+„Na 96 kHz aliasa ima ____manje__ nego na 48 kHz, a dodatni 2× OS na 96 kHz _____poboljsava zvuk_.“
+
+Na kraju: Ctrl+A, Ctrl+C u konzoli → Notepad → log_96k.txt, napravi fotografije i pošalji sve sebi mejlom.
+
+
+Loading application: "C:\Users\Korisnik\Downloads\sdos-lab5-overdrive (1)\sdos-lab5-overdrive\Lab05\Release\Lab05.dxe"
+Load complete.
+
+=== SDOS Lab5 / modifikacija 5 - overdrive i aliasing ===
+fs = 96000 Hz, fCCLK = 400 MHz, budzet = 4166 ciklusa/odmjerak
+half-band: L = 47 (NH = 12), beta = 8.0
+
+--- BENCHMARK (N=256, prazna petlja = 14.0 cik/odm oduzeta) ---
+BENCH tvrdo odsijecanje (G=8)      :    12.0 ciklusa/odmjerak
+BENCH tanhf, G=1 (mali argument)   :    67.9 ciklusa/odmjerak
+BENCH tanhf, G=8                   :   103.7 ciklusa/odmjerak
+BENCH tanhf, G=64 (zasicenje)      :    55.5 ciklusa/odmjerak
+BENCH polinom (G=8)                :    17.0 ciklusa/odmjerak
+BENCH interpolator 2x (half-band)  :    89.0 ciklusa/odmjerak
+BENCH decimator 2x (half-band)     :    82.0 ciklusa/odmjerak
+BENCH OS lanac bez nelinearnosti   :   168.0 ciklusa/odmjerak
+BENCH OS + tvrdo (G=8)             :   192.0 ciklusa/odmjerak
+BENCH OS + tanhf (G=8)             :   372.3 ciklusa/odmjerak
+BENCH OS + polinom (G=8)           :   200.0 ciklusa/odmjerak
+BENCH sweep generator              :    48.0 ciklusa/odmjerak
+--- kraj benchmarka ---
+
+Talkthrough is running successfully
+LOG fs=96000 mode=HARD   OS=1 src=SWEEP G=8.0   | obrada: min=63 avg=63.0 max=63 | cijeli prekid: avg=304.6 max=305 | budzet=4166 (7.31%) over=0
+LOG fs=96000 mode=HARD   OS=2 src=SWEEP G=8.0   | obrada: min=268 avg=268.0 max=268 | cijeli prekid: avg=440.6 max=510 | budzet=4166 (10.58%) over=0
+LOG fs=96000 mode=TANH   OS=2 src=SWEEP G=8.0   | obrada: min=344 avg=447.8 max=456 | cijeli prekid: avg=607.2 max=698 | budzet=4166 (14.57%) over=0
+
