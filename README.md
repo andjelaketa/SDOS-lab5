@@ -22,7 +22,7 @@
 - Ciklusi po odmjerku ne zavise od fs (HARD OS=2: 266 / 268).
 - Slušanjem: 2× OS i 96 kHz primjetno smanjuju aliase; polinom sa G ≤ 2 bez aliasa.
 
-Detalji: `docs/TABELA_PREDVIDJANJA.md`, logovi: `docs/logovi/`, izvještaj: `docs/izvjestaj/`.
+Detalji: `docs/TABELA_PREDVIDJANJA.md`, logovi: `docs/logovi/`, izvještaj: `docs/SDOS_Lab5_Laketa_Andjela.pdf`.
 
 ## Struktura
 ```
