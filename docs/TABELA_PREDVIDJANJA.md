@@ -2,7 +2,7 @@
 
 Predviđanja (kolona „Predviđeno“) su napisana **prije** rada na ploči, 19.11.2026. ujutro.
 Mjerenja su urađena istog dana na ADSP-21489 EZ-Board, CCES, **Release (-O)**.
-Sirovi log: `docs/logovi/log_mjerenja_i_biljeske.txt`.
+Log konzole: docs/logovi/log_konzola_jedinstveno.txt; zapažanja sa slušanja: docs/ZAPAZANJA_SLUSANJA.md.
 
 Pretpostavke: CCLK = 400 MHz (potvrđeno u `init_PLL_SDRAM.c`: CLKIN 25 MHz, PLLM=16, PLLD=2),
 kod i podaci u internoj memoriji, float aritmetika.
