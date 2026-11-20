@@ -13,6 +13,7 @@
  */
 
 #include "ADDS_21479_EzKit.h"
+#include "lab5_app.h"          /* LAB5: modifikacija 5 - overdrive */
 
 
 volatile float * DelayLine;
@@ -37,6 +38,17 @@ void	main()
     /* This function will configure the AD1939 codec on the 21469 EZ-KIT */
     init1939viaSPI();
 
+    /* LAB5: inicijalizacija overdrive-a, tastera i LED dioda + benchmark
+     * blokova (ispis BENCH linija). Mora biti POSLIJE InitDAI(), jer
+     * clearDAIpins() resetuje LED pinove, a PRIJE ukljucivanja prekida. */
+    lab5_init();
+    lab5_benchmark();
+
+    /* LAB5: tabela i bafer za eho premjesteni PRIJE instaliranja prekida -
+     * u originalu je prekid mogao doci dok je DelayLine jos NULL. */
+    SinTableInit();
+    DelayLine =(float *) malloc(DELAYLINESIZE * sizeof(float));
+
     /* Turn on SPORT0 TX and SPORT1 RX for Multichannel Operation */
 	enable_SPORT01_MCM_mode();
 
@@ -49,18 +61,16 @@ void	main()
 	*pSPMCTL0 |= MCEA;
 	*pSPMCTL1 |= MCEA;
 
-	SinTableInit();
-
-	/* Set up small delay buffer */
+	/* LAB5: SinTableInit() i malloc za DelayLine su premjesteni gore */
 //	DelayLine = (float *) 0x000C4000;
-	DelayLine =(float *) malloc(DELAYLINESIZE * sizeof(float));
 
 	for (;;)
 	  {
 		if(count==10)
 			puts("Talkthrough is running successfully");
 		count++;
-    	asm("idle;");
+    	asm("idle;");          /* ceka sljedeci prekid (odmjerak) */
+    	lab5_background();     /* LAB5: tasteri + LOG ispis ciklusa */
       }
 }
 
